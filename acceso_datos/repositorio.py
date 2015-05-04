@@ -1,5 +1,7 @@
 from sqlalchemy.orm import  sessionmaker
-from modelo.repositorio import *
+
+from dominio.repositorios.core import BaseRepositorio
+
 
 class DBRepositorio(BaseRepositorio):
     """

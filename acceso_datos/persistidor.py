@@ -1,11 +1,13 @@
 """
 Definición del mecanismo de persistencia (Tecnología para almacenar los datos)
 """
-from abc import abstractmethod, ABCMeta
+
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import mapper
-from modelo.entidades import *
-from infraestructura.persistencia.modelo.database import *
+
+from dominio.entidades.administracion import *
+from infraestructura.persistencia.repositorios.core import *
+
 
 class Persistidor(metaclass=ABCMeta):
 

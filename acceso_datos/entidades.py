@@ -1,6 +1,8 @@
 from sqlalchemy import *
 from sqlalchemy.orm import *
-from modelo.entidades import *
+
+from dominio.entidades.administracion import *
+
 
 db = create_engine('sqlite:///evaluaciones')
 
