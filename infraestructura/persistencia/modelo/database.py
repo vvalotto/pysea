@@ -27,8 +27,7 @@ class Database(object):
                              Column('a_contrasenia', String(20)),
                              Column('a_nombre', String(50)),
                              Column('a_apellido', String(50)),
-                             Column('a_habilitado', Integer),
-                             Column('id_rol', Integer, ForeignKey('td_rol.id')))
+                             Column('a_habilitado', Integer))
 
         self.rol = Table('td_rol', metadata,
                             Column('id', Integer, primary_key=True),

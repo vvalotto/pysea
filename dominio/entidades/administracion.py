@@ -169,3 +169,9 @@ class Materia(object):
         return '<Materia: %s>' % self.a_nombre
 
 
+class UsuarioRol(object):
+
+    def __init__(self):
+        self.id_usuario = 0
+        self.id_rol = 0
+

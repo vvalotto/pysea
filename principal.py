@@ -10,41 +10,39 @@ print('Inicio')
 DBEvaluacion = ContextoDB('sqlite:///acceso_datos/evaluaciones')
 
 print(type(DBEvaluacion))
+
 DBEvaluacion.inicializar_tablas()
 DBEvaluacion.inicializar_mapeos()
 
 carrera_repositorio = DBRepositorioCarrera(DBEvaluacion, Carrera)
-"""
-materia_repositorio = DBRepositorioMateria(DBEvaluacion, Materia)
-print(type(carrera_repositorio))
-print(type(materia_repositorio))
-"""
-carrera = Carrera()
-carrera.nombre = 'Licenciatura en Sistemas de Información'
-carrera.institucion = 'UADER'
-carrera.plan = '2014'
-mananger_carrera = ManagerEntidad(carrera_repositorio, carrera)
-mananger_carrera.guardar()
-"""
+rol_repositorio = DBRepositorioRol(DBEvaluacion, Rol)
+usuario_repositorio = DBRepositorioUsuario(DBEvaluacion, Usuario)
 
-mi_carrera = carrera_repositorio.obtener_por_id(carrera.id)
-print("Recupero:", mi_carrera)
+rol = Rol()
+rol_manager = ManagerEntidad(rol_repositorio, rol)
+rol = rol_manager.obtener_por_id(1)
 
-materia = Materia()
-materia.nombre = 'Métricas de Software'
-materia.carrera = mi_carrera
-materia_repositorio.guardar(materia)
-
-mi_materia = materia_repositorio.obtener_por_id(1)
-print("Recupero:", mi_materia)
-print('fin')
+print(rol.nombre)
+print(rol.descripcion)
+for u in rol.usuarios:
+    print('<Usuario: %s>' % u.usuario )
 
 
-carrera = Carrera()
-mananger_carrera = ManagerEntidad(carrera_repositorio, carrera)
-carrera = mananger_carrera.obtener_por_id(4)
-print(carrera.nombre)
-print(carrera.institucion)
-print(carrera.materias)
-"""
+usu = Usuario()
+manager_usuario = ManagerEntidad(usuario_repositorio, usu)
+usu = manager_usuario.obtener_por_id(1)
+
+print(usu.usuario)
+for r in usu.roles:
+    print('<Usuario: %s>' % r.nombre)
+
+
+usuario = Usuario()
+usuario.nombre = 'Nombre'
+usuario.apellido = 'Apellido'
+usuario.usuario = 'usuario'
+usuario.contrasenia = '12345'
+usuario_manager = ManagerEntidad(usuario_repositorio, usuario)
+usuario_manager.guardar()
+
 print('fin')
