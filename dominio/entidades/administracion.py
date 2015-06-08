@@ -35,6 +35,12 @@ class Rol(object):
         self.a_habilitado = 0
         self.usuarios = []
 
+    def __repr__(self):
+        return '<Rol: %s>' % self.a_nombre
+
+    def __str__(self):
+        return '%s: %r' %(self.a_nombre, self.a_descripcion)
+
 
 class Usuario(object):
 
@@ -85,6 +91,12 @@ class Usuario(object):
         self.a_apellido = ""
         self.a_habilitado = 0
         self.roles = []
+
+    def __repr__(self):
+        return '<Usuario: %s>' % self.a_nombre
+
+    def __str__(self):
+        return '%s: %r' %(self.a_nombre, self.a_descripcion + ' ' + self.a_apellido)
 
 
 class Carrera(object):

@@ -16,12 +16,10 @@ class RepositorioDB(BaseRepositorio):
         :return:
         """
         try:
-            Sesion = sessionmaker(bind=self._persistidor.recurso)
-            sesion = Sesion()
             if entidad.id is None:
-                sesion.add(entidad)
-            sesion.flush()
-            sesion.commit()
+                self._persistidor.sesion.add(entidad)
+            self._persistidor.sesion.flush()
+            self._persistidor.sesion.commit()
         except Exception as ex:
             raise ex
         return
@@ -31,16 +29,23 @@ class RepositorioDB(BaseRepositorio):
         :return:
         """
         try:
-            Sesion = sessionmaker(bind=self._persistidor.recurso)
-            sesion = Sesion()
             print(self._entidad)
-            entidad = sesion.query(self._entidad).get(id_entidad)
+            entidad = self._persistidor.sesion.query(self._entidad).get(id_entidad)
             print(type(entidad))
-            sesion.flush()
-            sesion.commit()
             return entidad
         except Exception:
             raise Exception
 
     def actualizar(self, entidad):
         pass
+
+    def obtener_todos(self):
+        """
+        Rescata todas las ocurrencias (filas) de la entidad
+        :return:
+        """
+        try:
+            lista_entidades = self._persistidor.sesion.query(self._entidad).all()
+            return lista_entidades
+        except Exception:
+            raise Exception

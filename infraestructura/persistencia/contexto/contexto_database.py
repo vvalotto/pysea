@@ -3,7 +3,7 @@ Definición del mecanismo de persistencia (Tecnología para almacenar los datos)
 """
 
 from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import mapper, relationship, relation
+from sqlalchemy.orm import mapper, relationship, relation, sessionmaker, session
 
 from dominio.entidades.administracion import *
 from infraestructura.persistencia.modelo.database import *
@@ -11,12 +11,25 @@ from infraestructura.persistencia.contexto.contexto import *
 
 
 class ContextoDB(BaseContexto):
+    """
+    Implementa un contexto correspodiente a un motor de base de datos
+    """
+    @property
+    def sesion(self):
+        return self._sesion
 
     def __init__(self, recurso):
+        """
+        El recurso corresponde al nombre y motor de la base de datos
+        :param recurso:
+        :return:
+        """
         super().__init__(recurso)
         self._recurso = create_engine(recurso)
         self._recurso.echo = False
         self._db = None
+        Sesion = self._sesion = sessionmaker(bind=self.recurso)
+        self._sesion = Sesion()
 
     def inicializar_tablas(self):
         """

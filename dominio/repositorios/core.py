@@ -25,3 +25,7 @@ class BaseRepositorio(metaclass=ABCMeta):
     @abstractmethod
     def actualizar(self, entidad):
         pass
+
+    @abstractmethod
+    def obtener_todos(self):
+        pass

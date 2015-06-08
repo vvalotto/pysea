@@ -18,31 +18,19 @@ carrera_repositorio = DBRepositorioCarrera(DBEvaluacion, Carrera)
 rol_repositorio = DBRepositorioRol(DBEvaluacion, Rol)
 usuario_repositorio = DBRepositorioUsuario(DBEvaluacion, Usuario)
 
-rol = Rol()
-rol_manager = ManagerEntidad(rol_repositorio, rol)
-rol = rol_manager.obtener_por_id(1)
+usuarios = usuario_repositorio.obtener_todos()
 
-print(rol.nombre)
-print(rol.descripcion)
-for u in rol.usuarios:
-    print('<Usuario: %s>' % u.usuario )
+mi_usuario = usuario_repositorio.obtener_por_id(1)
 
+for u in usuarios:
+    print(u.roles)
 
-usu = Usuario()
-manager_usuario = ManagerEntidad(usuario_repositorio, usu)
-usu = manager_usuario.obtener_por_id(1)
+roles = rol_repositorio.obtener_todos()
 
-print(usu.usuario)
-for r in usu.roles:
-    print('<Usuario: %s>' % r.nombre)
+for r in roles:
+    print(r.usuarios)
 
-
-usuario = Usuario()
-usuario.nombre = 'Nombre'
-usuario.apellido = 'Apellido'
-usuario.usuario = 'usuario'
-usuario.contrasenia = '12345'
-usuario_manager = ManagerEntidad(usuario_repositorio, usuario)
-usuario_manager.guardar()
+print(mi_usuario.nombre)
+print(mi_usuario.roles[0].nombre)
 
 print('fin')
