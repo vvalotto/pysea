@@ -8,6 +8,7 @@ from dominio.repositorios.core import BaseRepositorio
 class RepositorioDB(BaseRepositorio):
     """
     Definicion del Repositorio generico
+    Modifica
     """
 
     def guardar(self, entidad):
